@@ -58,6 +58,11 @@
     </section>
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
       <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Download" alt="Download">file_download</a>
+            <a  href="camera.html">
+<button class="mdc-fab" aria-label="Camera">
+  <span class="mdc-fab__icon material-icons" >camera</span>
+</button>        
+    </a>
   </section>
   </div>
 </header>
@@ -69,7 +74,7 @@
 			<h6 class="mdc-drawer__subtitle">gcontr21@uic.edu</h6>
 		</div>
 		<div class="mdc-drawer__content">
-			<nav class="mdc-list">
+			<nav>
 				<a class="mdc-list-item mdc-list-item--activated" href="index.html" aria-selected="true">
         <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Home</i>
         <span class="mdc-list-item__text">Home</span>
@@ -79,10 +84,7 @@
         <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
         <span class="mdc-list-item__text">Inbox</span>
       </a>
-                <a class="mdc-list-item" href="camera.html">
-        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Camera</i>
-        <span class="mdc-list-item__text">Camera</span>
-      </a>
+            
                      <a class="mdc-list-item" href="#slide-2">
         <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Contact</i>
         <span class="mdc-list-item__text">Contact</span>
@@ -103,6 +105,7 @@
     <div id="content" class="mdc-typography--body1"></div>
   </div>
 	
+
   
 
     <form>
@@ -110,13 +113,14 @@
 
 
       <select id="results" name="results">
+          
           <option>Fail</option>
           <option>Pass</option>
       </select>  
 
 
-      <button disabled type="button">Click me</button>
-
+      <button disabled type="button">Click me</button> 
+    
 
     </form>  
 
@@ -131,8 +135,7 @@
 
     <script>
 
-      // This example displays a marker at the center of Australia.
-      // When the user clicks the marker, an info window opens.
+      
 
       function initMap() {
         var chicago = {lat: 41.8781, lng: -87.6298};
@@ -226,4 +229,5 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA23qcXuGK77p1Smzt7qKsJsMF61TMvDaY">
     </script>
   </body>
+    
 </html>
