@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="apple-touch-fullscreen" content="YES" />  
+  	<meta name="google-signin-client_id" content="455879692718-31a814ua0ch6tal2errkrtf4976ckq1h.apps.googleusercontent.com">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Map</title>
+	<link rel="manifest" href="./manifest.json">
+	
+	<link rel="stylesheet" href="https://unpkg.com/material-components-web@0.40.0/dist/material-components-web.min.css" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="/iui/iui-logo-touch-icon.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body bgcolor="#ccc">
+	<!-- top nav bar -->
+	<header class="mdc-top-app-bar">
+  <div class="mdc-top-app-bar__row">
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+      <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
+      <span class="mdc-top-app-bar__title">Welcome</span>
+    </section>
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+      <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Download" alt="Download">file_download</a>
+  </section>
+  </div>
+</header>
+
+	<!-- the navigation drawer -->
+	<aside class="mdc-drawer mdc-drawer--modal" data-mdc-auto-init="MDCDrawer">
+		<div class="mdc-drawer__header">
+			<h3 class="mdc-drawer__title"></h3>
+			<h6 class="mdc-drawer__subtitle">gcontr21@uic.edu</h6>
+		</div>
+		<div class="mdc-drawer__content">
+			<nav class="mdc-list">
+				<a class="mdc-list-item mdc-list-item--activated" href="index.html" aria-selected="true">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Home</i>
+        <span class="mdc-list-item__text">Home</span>
+      
+                </a>
+				   <a class="mdc-list-item mdc-list-item--activated" href="" aria-selected="true">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
+        <span class="mdc-list-item__text">Inbox</span>
+      </a>
+                <a class="mdc-list-item" href="camera.html">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Camera</i>
+        <span class="mdc-list-item__text">Camera</span>
+      </a>
+                     <a class="mdc-list-item" href="#slide-2">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Contact</i>
+        <span class="mdc-list-item__text">Contact</span>
+      </a>
+          <a class="mdc-list-item" href="API.html">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Search Map</i>
+        <span class="mdc-list-item__text"></span>
+      </a>
+			
+			</nav>
+		</div>
+	</aside>
+	
+  
+  <div class="mdc-drawer-scrim"></div>
+	<div id="contentArea">
+    <div class="mdc-top-app-bar--fixed-adjust"></div>
+    <div id="content" class="mdc-typography--body1"></div>
+  </div>
+	
+  
+
+    <form>
+      <input id="zip" name="zip" type="text" placeholder="Enter a search value">
+
+
+      <select id="results" name="results">
+          <option>Fail</option>
+          <option>Pass</option>
+      </select>  
+
+
+      <button disabled type="button">Click me</button>
+
+
+    </form>  
+
+
+    <div id="map"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  
+
+
+
+    <script>
+
+      // This example displays a marker at the center of Australia.
+      // When the user clicks the marker, an info window opens.
+
+      function initMap() {
+        var chicago = {lat: 41.8781, lng: -87.6298};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: chicago
+        });
+
+        var endpoint = "https://data.cityofchicago.org/resource/cwig-ma7x.json";
+
+
+        var url = endpoint + "?zip=" + $("#zip").val();
+
+        url += "&results=" + $("#results").val();
+
+
+        $.ajax({
+              url: url,
+              type: "GET",
+              data: {
+                "$limit" : 50
+              }
+          }).done(function(data) {
+            //alert("Retrieved " + data.length + " records from the dataset!");
+            console.log(data);
+
+
+            $.each(data, function(i,v) {
+                  
+                  
+                  var marker = new google.maps.Marker({
+                            position: {lat: parseFloat(v.latitude), lng: parseFloat(v.longitude)},
+                            map: map,
+                            title: 'Chicago'
+                          });
+              
+                  var infowindow = new google.maps.InfoWindow({
+                    content: "<h1>" + v.dba_name + "</h1>"
+                  });
+
+                  marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                  });
+
+
+            });
+
+          });
+
+
+
+
+        
+
+        
+
+      }
+    </script>
+
+
+  <script>
+  
+      $("button").on("click", initMap)
+
+      $("#zip").on("input", function(e) {
+        if ($("#zip").val() != "") {
+          $("button").prop("disabled", false);
+        } else {
+          $("button").prop("disabled", true);
+        }
+      });
+
+
+
+  </script>
+
+<script src="https://apis.google.com/js/platform.js"></script>
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://unpkg.com/material-components-web@0.40.0/dist/material-components-web.min.js"></script>
+<script src="script.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA23qcXuGK77p1Smzt7qKsJsMF61TMvDaY">   </script> 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://unpkg.com/material-components-web@0.40.0/dist/material-components-web.min.js"></script>
+ 
+    
+   
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA23qcXuGK77p1Smzt7qKsJsMF61TMvDaY">
+    </script>
+  </body>
+</html>

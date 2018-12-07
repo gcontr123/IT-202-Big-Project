@@ -1,0 +1,167 @@
+<html>
+ <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>Camera</title>
+  	<meta name="google-signin-client_id" content="455879692718-31a814ua0ch6tal2errkrtf4976ckq1h.apps.googleusercontent.com">
+      	<link rel="stylesheet" href="https://unpkg.com/material-components-web@0.40.0/dist/material-components-web.min.css" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+     
+<style>
+     body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+#camera, #camera--view, #camera--sensor, #camera--output{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+#camera--view, #camera--sensor, #camera--output{
+    transform: scaleX(-1);
+    filter: FlipH;
+}
+#camera--trigger{
+    width: 200px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+    position: fixed;
+    bottom: 30px;
+    left: calc(50% - 100px);
+}
+.taken{
+    height: 100px!important;
+    width: 100px!important;
+    transition: all 0.5s ease-in;
+    border: solid 3px white;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+}
+     
+     </style>
+    
+         
+     </head>
+    
+    
+ <body bgcolor="#ccc">
+	<!-- top nav bar -->
+	<header class="mdc-top-app-bar">
+  <div class="mdc-top-app-bar__row">
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+      <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
+      <span class="mdc-top-app-bar__title">Welcome</span>
+    </section>
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+      <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Download" alt="Download">file_download</a>
+      <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Print this page" alt="Print this page">print</a>
+    </section>
+  </div>
+</header>
+
+	<!-- the navigation drawer -->
+	<aside class="mdc-drawer mdc-drawer--modal" data-mdc-auto-init="MDCDrawer">
+		<div class="mdc-drawer__header">
+			<h3 class="mdc-drawer__title">Mail</h3>
+			<h6 class="mdc-drawer__subtitle">gcontr21@uic.edu</h6>
+		</div>
+		<div class="mdc-drawer__content">
+			<nav class="mdc-list">
+				<a class="mdc-list-item mdc-list-item--activated" href="index.html" aria-selected="true">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Home</i>
+        <span class="mdc-list-item__text">Home</span>
+      
+                </a>
+				   <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
+        <span class="mdc-list-item__text">Inbox</span>
+      </a>
+                <a class="mdc-list-item" href="camera.html">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Camera</i>
+        <span class="mdc-list-item__text">Camera</span>
+      </a>
+                     <a class="mdc-list-item" href="#slide-2">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">Contact</i>
+        <span class="mdc-list-item__text">Contact</span>
+      </a>
+          <a class="mdc-list-item" href="API.html">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">PASS/FAIL</i>
+        <span class="mdc-list-item__text"></span>
+      </a>
+			
+			</nav>
+		</div>
+	</aside>
+	
+  
+  <div class="mdc-drawer-scrim"></div>
+	<div id="contentArea">
+    <div class="mdc-top-app-bar--fixed-adjust"></div>
+    <div id="content" class="mdc-typography--body1"></div>
+  </div>
+	
+  
+
+    
+   
+<main id="camera">
+        <!-- Camera sensor -->
+        <canvas id="camera--sensor"></canvas>
+        <!-- Camera view -->
+        <video id="camera--view" autoplay playsinline></video>
+        <!-- Camera output -->
+        <img src="//:0" alt="" id="camera--output">
+        <!-- Camera trigger -->
+        <button id="camera--trigger">Take a picture</button>
+    </main>    
+       
+       <script>
+        // Set constraints for the video stream
+var constraints = { video: { facingMode: "user" }, audio: false };
+// Define constants
+const cameraView = document.querySelector("#camera--view"),
+    cameraOutput = document.querySelector("#camera--output"),
+    cameraSensor = document.querySelector("#camera--sensor"),
+    cameraTrigger = document.querySelector("#camera--trigger")
+// Access the device camera and stream to cameraView
+function cameraStart() {
+    navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function(stream) {
+        track = stream.getTracks()[0];
+        cameraView.srcObject = stream;
+    })
+    .catch(function(error) {
+        console.error("Oops. Something is broken.", error);
+    });
+}
+// Take a picture when cameraTrigger is tapped
+cameraTrigger.onclick = function() {
+    cameraSensor.width = cameraView.videoWidth;
+    cameraSensor.height = cameraView.videoHeight;
+    cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
+    cameraOutput.src = cameraSensor.toDataURL("image/webp");
+    cameraOutput.classList.add("taken");
+};
+// Start the video stream when the window loads
+window.addEventListener("load", cameraStart, false);
+    </script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://unpkg.com/material-components-web@0.40.0/dist/material-components-web.min.js"></script>
+<script src="script.js"></script>   
+  <script src="https://apis.google.com/js/platform.js"></script>
+<script src="https://apis.google.com/js/api.js"></script>  
+  </body>
+</html>
